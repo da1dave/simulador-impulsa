@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pruebas del modelo · Simulador de arquitecturas</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#414874" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F1226" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="estilos.css">
+<script>
+  /* Mismo tema que el simulador (el guardado, o el del sistema). */
+  try {
+    var t = window.localStorage.getItem('impulsa-sim-tema');
+    if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+  } catch (err) { /* sin almacenamiento: se usa el tema del sistema */ }
+</script>
+<style>
+  .pr-cab { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+  .pr-cab h1 { font-size: 28px; }
+  .pr-sub { display: flex; flex-wrap: wrap; gap: 4px 16px; align-items: center; justify-content: space-between; margin: 0 0 14px; }
+  .pr-sub p { margin: 0; color: var(--muted); max-width: 70ch; }
+  .pr-sub .btn { min-height: 44px; }
+  .pr-barra { display: flex; gap: 3px; height: 6px; margin: 0 0 16px; }
+  .pr-barra span { flex: 1; border-radius: 3px; background: var(--ok); }
+  .pr-barra span.falla { background: var(--bad); }
+  .pr-lista { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; align-items: start; }
+  .pr { max-width: none; margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--sombra-card); }
+  .pr[open] { border-color: var(--accent-soft); }
+  .pr.falla { border-color: var(--bad); }
+  .pr > summary { padding: 8px 14px; min-height: 52px; font-weight: 600; font-size: 14px; line-height: 1.35; border-radius: 16px; }
+  .pr-n { flex: none; display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--surface-2); color: var(--muted); font-size: 13px; font-weight: 700; }
+  .pr-t { flex: 1; min-width: 0; }
+  .pr .marca { flex: none; margin: 0; }
+  .pr-cuerpo { padding: 0 14px 14px 54px; }
+  .pr-cuerpo p { margin: 0; color: var(--muted); font-size: 13.5px; max-width: none; }
+  .pr-cuerpo .err { margin-top: 8px; font-size: 13.5px; }
+  .pr-pie { margin-top: 20px; }
+  @media (min-width: 900px) { .pr-lista { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) {
+    .pr-cab h1 { font-size: 24px; }
+    .pr > summary { gap: 10px; padding: 8px 12px; }
+    .pr .chev { display: none; }
+    .pr-n { width: 24px; height: 24px; font-size: 12px; }
+    .pr-cuerpo { padding: 0 12px 12px 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="pagina">
+  <p class="pr-nav"><a class="btn" href="index.html#modelo">← Volver al simulador</a></p>
+  <header class="pr-cab">
+    <h1>Pruebas del modelo</h1>
+    <div class="estado-box" id="resumen-pruebas" aria-live="polite"></div>
+  </header>
+  <div class="pr-sub">
+    <p>Cada prueba usa los valores de referencia, no los guardados en tu navegador.</p>
+    <button type="button" class="btn" id="btn-todo" aria-pressed="false">Ver detalles</button>
+  </div>
+  <div class="pr-barra" id="pr-barra" role="img" aria-label=""></div>
+  <ol class="pr-lista" id="pruebas"></ol>
+</div>
+<script src="datos.js"></script>
+<script src="modelo.js"></script>
+<script src="estado.js"></script>
+<script src="pruebas.js"></script>
+</body>
+</html>
